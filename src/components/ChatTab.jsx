@@ -14,10 +14,10 @@ function ToolChip({ toolKey }) {
   return (
     <div className="flex flex-col items-center gap-1.5">
       <div
-        className="w-10 h-10 rounded-xl flex items-center justify-center"
+        className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center"
         style={{ background: 'rgba(255,255,255,0.06)', border: `1px solid ${tool.color}55` }}
       >
-        <ToolLogo toolKey={toolKey} size={22} />
+        <ToolLogo toolKey={toolKey} size={20} />
       </div>
       <span className="text-xs text-t-tertiary" style={{ fontSize: 10 }}>{tool.name}</span>
     </div>
@@ -127,9 +127,9 @@ export default function ChatTab() {
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="card p-4">
-        <span className="text-xs font-semibold text-t-tertiary uppercase tracking-widest block mb-3">
+    <div className="flex flex-col gap-3 sm:gap-4">
+      <div className="card p-3 sm:p-4">
+        <span className="text-xs font-semibold text-t-tertiary uppercase tracking-widest block mb-2 sm:mb-3">
           Connected tools
         </span>
         <div className="flex gap-4 sm:gap-5 overflow-x-auto pb-1">
@@ -137,24 +137,27 @@ export default function ChatTab() {
         </div>
       </div>
 
-      <div className="card flex flex-col overflow-hidden h-[560px] sm:h-[500px]">
-        <div className="flex-1 overflow-y-auto px-3 sm:px-4 py-4 flex flex-col gap-3">
+      <div className="card flex flex-col overflow-hidden h-[calc(100svh-248px)] min-h-[430px] max-h-[560px] sm:h-[calc(100vh-250px)] sm:min-h-[420px] sm:max-h-[520px]">
+        <div className="flex-1 overflow-y-auto px-3 sm:px-4 py-3 sm:py-4 flex flex-col gap-3">
           {messages.map(message => <MessageBubble key={message.id} message={message} />)}
           {isThinking && <ThinkingIndicator />}
           <div ref={bottomRef} />
         </div>
 
-        <div className="px-3 sm:px-4 py-3 flex gap-2 overflow-x-auto sm:flex-wrap" style={{ borderTop: '1px solid var(--section-border)' }}>
+        <div
+          className="px-3 sm:px-4 py-3 grid grid-flow-col auto-cols-[78%] sm:auto-cols-auto sm:grid-flow-row sm:grid-cols-2 gap-2 overflow-x-auto sm:overflow-visible"
+          style={{ borderTop: '1px solid var(--section-border)' }}
+        >
           {COMMAND_PROMPTS.map(prompt => (
             <button
               key={prompt.title}
               onClick={() => runPrompt(prompt)}
               disabled={isThinking}
-              className="text-xs px-3 py-1.5 rounded-full transition-all duration-150 disabled:opacity-50 whitespace-nowrap flex-shrink-0"
+              className="text-left text-sm sm:text-xs px-4 sm:px-3 py-3 sm:py-2 rounded-xl sm:rounded-lg transition-all duration-150 disabled:opacity-50 leading-snug min-h-[54px] sm:min-h-0"
               style={{
                 color: '#d9dbe7',
-                background: 'rgba(255,255,255,0.04)',
-                border: '1px solid rgba(255,255,255,0.08)',
+                background: 'rgba(255,255,255,0.055)',
+                border: '1px solid rgba(255,255,255,0.1)',
               }}
               onMouseEnter={e => {
                 e.currentTarget.style.color = '#f0f0f0'

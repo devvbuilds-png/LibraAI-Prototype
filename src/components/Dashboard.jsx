@@ -75,7 +75,12 @@ function DashboardInner() {
 
       {/* Content */}
       <main className="flex-1 w-full max-w-3xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
-        {activeTab === 'chat' ? <ChatTab /> : <ActivityTab />}
+        <div style={{ display: activeTab === 'chat' ? 'block' : 'none' }}>
+          <ChatTab />
+        </div>
+        <div style={{ display: activeTab === 'activity' ? 'block' : 'none' }}>
+          <ActivityTab />
+        </div>
       </main>
     </div>
   )
